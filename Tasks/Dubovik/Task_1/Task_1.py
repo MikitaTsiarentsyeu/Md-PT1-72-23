@@ -1,3 +1,3 @@
-c = int(input("Please, Input Celsius value: "))
+c = int(input("Please, input Celsius value: "))
 f = c*(9/5) + 32
-print("Farenheit value is", f)
+print("Fahrenheit value is :", f)
