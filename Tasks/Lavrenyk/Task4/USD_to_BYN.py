@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+from decimal import Decimal
 
 
 def getUSD():
@@ -13,10 +14,10 @@ def getUSD():
 if __name__ == '__main__':
     while True:
         try:
-            usd = float(input('Введите количество USD для обмена: '))
+            usd = Decimal(input('Введите количество USD для обмена: '))
         except ValueError:
             print('Ошибка! Введены неверные данные, попробуйте еще раз!\n')
             continue
         break
 
-    print(f'BYN: {usd * getUSD()}')
+    print(f'BYN: {usd * Decimal(f"{getUSD()}")}')
