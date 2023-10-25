@@ -18,8 +18,7 @@ def to_next_hour(hhmm: list, to_next='we_need'):
 
 
 numbers = {
-    0: [''],
-    1: ['', "первого"],
+    1: ['час', "первого"],
     2: ["два", "второго", "двух"],
     3: ["три", "третьего", "трёх"],
     4: ["четыре", "четвёртого", "четырёх"],
@@ -97,8 +96,10 @@ elif 30 < hh_mm[1] < 45:
         print(f'{user_time} - тридцать две минуты {numbers[hh_mm[0]][1]}')
     elif 32 < hh_mm[1] < 35:
         print(f'{user_time} - тридцать {numbers[int(str(hh_mm[1])[-1])][0]} минуты {numbers[hh_mm[0]][1]}')
-    elif 35 <= hh_mm[1] <= 40:
+    elif 35 <= hh_mm[1] < 40:
         print(f'{user_time} - тридцать {numbers[int(str(hh_mm[1])[-1])][0]} минут {numbers[hh_mm[0]][1]}')
+    elif hh_mm[1] == 40:
+        print(f'{user_time} - сорок минут {numbers[hh_mm[0]][1]}')
     elif hh_mm[1] == 41:
         print(f'{user_time} - сорок одна минута {numbers[hh_mm[0]][1]}')
     elif hh_mm[1] == 42:
@@ -108,7 +109,7 @@ elif 30 < hh_mm[1] < 45:
 
 # min >= 45 без min такого-то (08:54 - без шести минут девять)
 elif hh_mm[1] >= 45:
-    to_next_hour(hh_mm)
+    hh_mm[0] = to_next_hour(hh_mm)
     if hh_mm[1] == 59:
         print(f'{user_time} - без одной минуты {numbers[hh_mm[0]][0]}')
     elif 56 <= hh_mm[1] <= 58:
