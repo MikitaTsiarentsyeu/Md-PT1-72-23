@@ -12,7 +12,7 @@ d_hour = {
     8:  ["восемь", "девятого", "девять"],
     9:  ["девять", "десятого", "десять"],
     10: ["десять", "одиннадцатого", "одинадцать"],
-    11: ["одиннадцать", "двенацтаого", "двенадцать"],
+    11: ["одиннадцать", "двенадцатого", "двенадцать"],
     12: ["двенадцать", "первого", "час"],
 }
 
@@ -93,7 +93,7 @@ res_hour = d_hour.get(hour)
 res_minutes = d_minutes.get(min)
 
 if hour == 12 and min == 0:
-    print("Ровно полдень")
+    print("ровно полдень")
 elif 1 < hour < 11 and min == 0:
     if hour in range(2, 4):
         x = "часа"
@@ -104,7 +104,7 @@ elif 1 < hour < 11 and min == 0:
     res_current_time = f"{res_hour[0]} {x} ровно"
     print(res_current_time)
 else:
-    print("Ровно полночь")
+    print("ровно полночь")
 
 if min == 30:
     res_current_time = f"{res_minutes[0]} {res_hour[1]}"
