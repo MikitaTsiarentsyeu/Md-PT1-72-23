@@ -12,7 +12,6 @@ numbers = {
     10: ["десять", "десятого"],
     11: ["одиннадцать", "одиннадцатого"],
     12: ["двенадцать", "двенадцатого"],
-
     13: ["тринадцать"],
     14: ["четырнадцать"],
     15: ["пятнадцать"],
@@ -21,10 +20,6 @@ numbers = {
     18: ["восемнадцать"],
     19: ["девятнадцать"],
     20: ["двадцать"],
-    21: [""],
-    22: [""],
-    23: [""],
-    24: [""],
 }
 
 print("Введите время в виде чч:мм")
@@ -50,18 +45,27 @@ elif hh_mm[1] == 0:
     else:
         print(f'{user_time} - {numbers[hh_mm[0]][0]} часов ровно')
 
-# min < 30: столько-то минут следующего часа (19:12 - двенадцать минут восьмого)
-# [5;20] минут
+# :} min < 30: столько-то минут следующего часа (19:12 - двенадцать минут восьмого)
 elif hh_mm[1] < 30:
     if hh_mm[0]+1 > 12:
         hh_mm[0] = hh_mm[0]+1 - 12
+    elif hh_mm[0] == 0:
+        hh_mm[0] = hh_mm[0] + 1
+
     if hh_mm[1] == 1:
         print(f'{user_time} - одна минута {numbers[hh_mm[0]][1]}')
     elif hh_mm[1] == 2:
         print(f'{user_time} - две минуты {numbers[hh_mm[0]][1]}')
     elif hh_mm[1] in [3, 4]:
         print(f'{user_time} - {numbers[hh_mm[1]][0]} минуты {numbers[hh_mm[0]][1]}')
-    # elif
+    elif hh_mm[1] in range(5, 21):
+        print(f'{user_time} - {numbers[hh_mm[1]][0]} минут {numbers[hh_mm[0]][1]}')
+    elif hh_mm[1] == 21:
+        print(f'{user_time} - двадцать одна минута {numbers[hh_mm[0]][1]}')
+    elif hh_mm[1] in range(22, 25):
+        print(f'{user_time} - двадцать {"две" if hh_mm[1] == 22 else numbers[int(str(hh_mm[1])[-1])][0]} минуты {numbers[hh_mm[0]][1]}')
+    elif hh_mm[1] in range(25, 30):
+        print(f'{user_time} - двадцать {numbers[int(str(hh_mm[1])[-1])][0]} минут {numbers[hh_mm[0]][1]}')
 
 # :} min == 30: половина такого-то (15:30 - половина четвёртого)
 elif hh_mm[1] == 30:
