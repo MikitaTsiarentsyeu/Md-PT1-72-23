@@ -1,6 +1,11 @@
-def to_next_hour(hhmm, next='we_need'):
-    ''' Данная функция создана для уменьшения объёма словаря и перехода к следующему через уже знакомы числа. '''
-    if next == 'we_need':
+def to_next_hour(hhmm: list, to_next='we_need'):
+    """
+    Данная функция создана для уменьшения объёма словаря и перехода к следующему через уже знакомы числа.
+    hhmm: list,
+    next: str (like a switch),
+    return list[0]
+    """
+    if to_next == 'we_need':
         if hhmm[0]+1 > 12:
             hhmm[0] = hhmm[0]+1 - 12
         else:
@@ -72,7 +77,8 @@ elif hh_mm[1] < 30:
     elif hh_mm[1] == 21:
         print(f'{user_time} - двадцать одна минута {numbers[hh_mm[0]][1]}')
     elif hh_mm[1] in range(22, 25):
-        print(f'{user_time} - двадцать {"две" if hh_mm[1] == 22 else numbers[int(str(hh_mm[1])[-1])][0]} минуты {numbers[hh_mm[0]][1]}')
+        print(f'{user_time} - двадцать {"две" if hh_mm[1] == 22 else numbers[int(str(hh_mm[1])[-1])][0]} ', end='')
+        print(f'минуты {numbers[hh_mm[0]][1]}')
     elif hh_mm[1] in range(25, 30):
         print(f'{user_time} - двадцать {numbers[int(str(hh_mm[1])[-1])][0]} минут {numbers[hh_mm[0]][1]}')
 
