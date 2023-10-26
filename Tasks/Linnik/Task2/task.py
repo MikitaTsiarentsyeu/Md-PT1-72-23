@@ -1,6 +1,6 @@
 def to_next_hour(hhmm: list, to_next='we_need'):
     """
-    Данная функция создана для уменьшения объёма словаря и перехода к следующему через уже знакомы числа.
+    Данная функция создана для уменьшения объёма словаря и перехода к следующему через уже знакомые числа.
     hhmm: list,
     next: str (like a switch),
     return list[0]
@@ -47,8 +47,9 @@ hh_mm = []
 separated_time = user_time.split(':')
 hh_mm.append(int(separated_time[0]))
 hh_mm.append(int(separated_time[1]))
+del separated_time
 
-if len(user_time) > 5 or hh_mm[0] > 24 or hh_mm[1] > 59:
+if len(user_time) > 5 or hh_mm[0] > 23 or hh_mm[1] > 59:
     print("Напишите правильно время")
 
 # :} min == 0: такое-то значение часа ровно (15:00 - три часа ровно)
