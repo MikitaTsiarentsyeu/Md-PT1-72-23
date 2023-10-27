@@ -94,7 +94,7 @@ res_minutes = d_minutes.get(min)
 
 if hour == 12 and min == 0:
     print("ровно полдень")
-elif 1 < hour < 11 and min == 0:
+elif 1 < hour < 12 and min == 0:
     if hour in range(2, 4):
         x = "часа"
     elif hour == 1:
