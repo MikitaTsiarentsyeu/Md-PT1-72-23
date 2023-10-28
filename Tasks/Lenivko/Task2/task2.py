@@ -52,4 +52,4 @@ if minutes >= 45:
     hours += 1
     if hours > 12:
         hours -= 12
-    print(f'{mm_dict.get(minutes)} {hh_dict_1.get(hours)[0]}')
+    print(f'{mm_dict.get(minutes)} {hh_dict_1.get(hours)[1]}')
