@@ -1,0 +1,1 @@
+# 2. Write a program that takes a list of numbers as input and returns the sum of all even numbers in the list.
