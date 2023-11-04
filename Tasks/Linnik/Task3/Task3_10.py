@@ -7,7 +7,7 @@ for i in numbers:
     if i <= 1:
         continue
     for j in range(2, 8):
-        if i % j == 0:
+        if i % j == 0 and i not in (2, 3, 5, 7):
             flag = False
     if flag:
         if largest_prime_num == '' or largest_prime_num < i:
