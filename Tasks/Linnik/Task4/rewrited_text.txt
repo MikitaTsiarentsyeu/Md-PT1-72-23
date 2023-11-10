@@ -1,0 +1,28 @@
+hile the work going on in the background
+much has shifted in the way of rankings.
+
+Python continues to sit atop the index,
+Feb. 2021, those three also occupied the
+ top spot, but with Python in the number
+three  position, C at top, and Java in s
+ hasn’t been much movement in the index,
+with  positions four through eight uncha
+nged from the same time last year. Those
+slots  are occupied, respectively, by C+
++, C#, Visual Basic, JavaScript and PHP.
+ Positions nine and 10 swapped from Feb.
+21  to now, with Assembly Language and S
+QL now occupying each other's positions.
+The  one big move of note between Feb. 2
+anguage for Java. Over the course of the
+year,  Groovy fell from 12th position al
+l the way to 20th, putting it perilously
+close  to the "other programming languag
+es Groovy's decline to the growth in the
+CI/CD  space. Groovy was the only langua
+he only real player in the CI/CD domain"
+early  on. Now, with platforms that don’
+over that position right now, so I think
+Groovy  will have a hard time," Jensen s
+ed more than 1 percent in the rankings,"
+ve a larger impact on scores.
