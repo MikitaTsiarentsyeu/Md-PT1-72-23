@@ -11,7 +11,7 @@ def upper_lower(str):
             upper += 1
         elif i.islower():
             lower += 1
-    return (f'Uppercase letters:{upper},Lowercase letters:" {lower}')
+    return (f'Uppercase letters:{upper},Lowercase letters: {lower}')
 print(upper_lower(str))
 print(upper_lower(str2))
 
