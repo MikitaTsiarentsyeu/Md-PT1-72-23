@@ -17,3 +17,5 @@ def reverse_words_in_list(list_str: list) -> list:
 print(reverse_words_in_list(['wow', 'Linnik', 'Zarina']))
 print(reverse_words_in_list(['did', 'lentiv', 'bomb']))
 print(reverse_words_in_list(['a', 'AcdB', 'gorilla']))
+print(reverse_words_in_list(['a']))
+print(reverse_words_in_list([]))
