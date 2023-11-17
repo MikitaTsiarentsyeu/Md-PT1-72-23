@@ -1,7 +1,7 @@
 def count_lower_and_upper(string: str) -> tuple:
     """
     The function returns a number of lowercase letters and a number of uppercase letters.
-    :string: str.
+    :parameter string: str.
     :return: tuple(num_lowercase_letters, num_uppercase_letters)
     """
     no_letters = r"1234567890,./?<|>\ `~!@#№$%:;^&*()_-+={}[]'" + '"'
