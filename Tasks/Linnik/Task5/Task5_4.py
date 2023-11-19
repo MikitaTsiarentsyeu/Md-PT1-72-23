@@ -4,24 +4,14 @@ def count_lower_and_upper(string: str) -> tuple:
     :parameter string: str.
     :return: tuple(num_lowercase_letters, num_uppercase_letters)
     """
-    no_letters = r"1234567890,./?<|>\ `~!@#№$%:;^&*()_-+={}[]'" + '"'
     lowercase_letters = 0
     uppercase_letters = 0
-    low_str = string.lower()
-    up_str = string.upper()
-
-    for i, e in enumerate(string):
-        if e in no_letters:
-            continue
-        if e == low_str[i]:
+    for i in string:
+        if i.isalpha() and i.islower():
             lowercase_letters += 1
-
-    for i, e in enumerate(string):
-        if e in no_letters:
-            continue
-        if e == up_str[i]:
+    for i in string:
+        if i.isalpha() and i.isupper():
             uppercase_letters += 1
-
     return lowercase_letters, uppercase_letters
 
 
