@@ -1,9 +1,6 @@
-my_str = 'I like to move it'
-my_str_low = my_str.lower()
-print(my_str_low)
-vowels = []
-for i in my_str_low:
-    if i in 'bcdfhqjklmnpqrstvwxz':
-        vowels.append(i)
-number_vowels = len(vowels)
-print(f'The number of vowels is {number_vowels}.')
+my_str = 'I would like to go to the cinema on Saturday.'
+vowels_l = []
+for i in my_str:
+    if i in 'AEIOUYaeiouy':
+        vowels_l.append(i)
+print('The number of vowels in my string:', len(vowels_l))
