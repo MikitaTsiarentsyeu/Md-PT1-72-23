@@ -22,7 +22,7 @@ class Book:
 
     def __setIsbn(self, isbn):
         if len(isbn) != 13:
-            isbn = "0000000000000"
+            isbn = str(randint(1000000000000, 9999999999999))
         self.__Isbn = isbn
 
     def getIsbn(self):
