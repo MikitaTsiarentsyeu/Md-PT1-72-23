@@ -1,5 +1,6 @@
 import re
 
+
 class Book:
 
     def __init__(self, title, author, isbn, price):
@@ -55,34 +56,59 @@ class EBook(Book):
     download_link = property(get_download_link, set_download_link)
 
 
-paws = EBook('My Life In His Paws', 'Wendy Hillings', 1234567891234, 25, \
-             'PDF', 10, "https://www.goodreads.com/book/show/29244831-my-life-in-his-paws")
+class PhysicalBook(Book):
+
+    def __init__(self, title, author, isbn, price, weight, in_stock=True):
+        super().__init__(title, author, isbn, price)
+        self.__weight = weight
+        self.__in_stock = in_stock
+
+    def get_status(self):
+        return self.__in_stock
+
+    def update_status(self, in_stock):
+        self.__in_stock = in_stock
+
+    def get_weight(self):
+        return self.__weight
+
+    in_stock = property(get_status, update_status)
+    weight = property(get_weight)
+
+
+class Customer:
+
+    class ShoppingCart:
+        pass
+
+    def __init__(self, name, email, address):
+        self.name = name
+        self.email = email
+        self.address = address
+
+
+e_paws = EBook('My Life In His Paws', 'Wendy Hillings', 1234567891634, 25, \
+               'PDF', 10, "https://www.goodreads.com/book/show/29244831-my-life-in-his-paws")
+#
+ph_paws1 = PhysicalBook('My Life In His Paws', 'Wendy Hillings', 1234567891234, 25, \
+                       150)
+ph_paws1.in_stock = False
+#
+ph_paws2 = PhysicalBook('My Life In His Paws', 'Wendy Hillings', 1234567893454, 45, \
+                       200)
 ennead = EBook('Ennead', 'Mojito', 1234567891267, 30, \
-              'ePub', 30, "https://www.tappytoon.com/en/book/ennead")
-print(paws.title, paws.author, paws.isbn, paws.price, \
-      paws.format_and_file_size, paws.download_link, sep='; ')
-print(ennead.title, ennead.author, ennead.isbn, ennead.price, \
+               'ePub', 30, "https://www.tappytoon.com/en/book/ennead")
+
+print('e_paws:', e_paws.title, e_paws.author, e_paws.isbn, e_paws.price, \
+      e_paws.format_and_file_size, e_paws.download_link, sep='; ')
+print('ph_paws1:', ph_paws1.title, ph_paws1.author, ph_paws1.isbn, ph_paws1.price, \
+      ph_paws1.weight, ph_paws1.in_stock, sep='; ')
+print('ph_paws2:', ph_paws2.title, ph_paws2.author, ph_paws2.isbn, ph_paws2.price, \
+      ph_paws2.weight, ph_paws2.in_stock, sep='; ')
+print('ennead:', ennead.title, ennead.author, ennead.isbn, ennead.price, \
       ennead.format_and_file_size, ennead.download_link, sep='; ')
 
 
-# Class 3: PhysicalBook
-# Create a class PhysicalBook that also inherits from the Book class. Add the following attributes:
-#
-# Weight (in grams)
-# In Stock (boolean indicating availability)
-# Include a method in the PhysicalBook class to update the availability status.
-
-# Class 4: Customer
-# Create a class Customer to represent a customer of the online bookstore.
-# Each customer should have the following attributes:
-#
-# Name
-# Email
-# Address
-
-# Class 5: ShoppingCart
-# Create a class ShoppingCart that represents a customer's shopping cart. It should be able to:
-#
 # Add a book (either Book, EBook, or PhysicalBook) to the cart.
 # Remove a book from the cart.
 # Calculate the total price of the items in the cart.
