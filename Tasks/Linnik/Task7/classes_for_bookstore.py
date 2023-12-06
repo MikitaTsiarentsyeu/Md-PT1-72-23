@@ -1,7 +1,42 @@
-# Class 1: Book
-# Create a class Book to represent information about a book. Each book should have the following attributes:
-# (title, author, ISBN (International Standard Book Number), price)
-# Implement the necessary methods to get and set these attributes. Ensure that the ISBN is a 13-digit number.
+class Book:
+
+    def __init__(self, title, author, isbn, price):
+        self.__title = title
+        self.__author = author
+        self.__set_isbn(isbn)
+        self.price = price
+
+    def get_title(self):
+        return self.__title
+
+    def get_author(self):
+        return self.__author
+
+    def get_isbn(self):
+        return self.__isbn
+
+    def __set_isbn(self, isbn):
+        while True:
+            if len(str(isbn)) != 13 or not isinstance(isbn, int):
+                print('it must have 13 digits! \ntry again!')
+                try:
+                    isbn = int(input())
+                except ValueError:
+                    print('it must be an integer and', end=' ')
+            else:
+                self.__isbn = isbn
+                break
+
+    title = property(get_title)
+    author = property(get_author)
+    isbn = property(get_isbn)
+
+paws = Book('My Life In His Paws', 'Wendy Hillings', 1234567891234, 25)
+print(paws.title, paws.author, paws.isbn, paws.price, sep='; ')
+paws.price += 5
+print(paws.price)
+
+
 
 # Class 2: EBook
 # Create a class EBook that inherits from the Book class. Add the following attributes:
