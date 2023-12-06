@@ -1,3 +1,5 @@
+import re
+
 class Book:
 
     def __init__(self, title, author, isbn, price):
@@ -31,20 +33,37 @@ class Book:
     author = property(get_author)
     isbn = property(get_isbn)
 
-paws = Book('My Life In His Paws', 'Wendy Hillings', 1234567891234, 25)
-print(paws.title, paws.author, paws.isbn, paws.price, sep='; ')
-paws.price += 5
-print(paws.price)
+
+class EBook(Book):
+
+    def __init__(self, title, author, isbn, price, format_, file_size, download_link):
+        super().__init__(title, author, isbn, price)
+        self.format_and_file_size = (format_, file_size)
+        self.set_download_link(download_link)
+
+    def get_download_link(self):
+        return self.__download_link
+
+    def set_download_link(self, download_link):
+        while True:
+            if re.search("^https://", download_link):
+                self.__download_link = download_link
+                break
+            else:
+                download_link = input("Give another link that starts with 'https://'. \n")
+
+    download_link = property(get_download_link, set_download_link)
 
 
+paws = EBook('My Life In His Paws', 'Wendy Hillings', 1234567891234, 25, \
+             'PDF', 10, "https://www.goodreads.com/book/show/29244831-my-life-in-his-paws")
+ennead = EBook('Ennead', 'Mojito', 1234567891267, 30, \
+              'ePub', 30, "https://www.tappytoon.com/en/book/ennead")
+print(paws.title, paws.author, paws.isbn, paws.price, \
+      paws.format_and_file_size, paws.download_link, sep='; ')
+print(ennead.title, ennead.author, ennead.isbn, ennead.price, \
+      ennead.format_and_file_size, ennead.download_link, sep='; ')
 
-# Class 2: EBook
-# Create a class EBook that inherits from the Book class. Add the following attributes:
-#
-# Format (e.g., PDF, ePub)
-# File Size (in MB)
-# Download Link
-# Ensure that the download link starts with "https://".
 
 # Class 3: PhysicalBook
 # Create a class PhysicalBook that also inherits from the Book class. Add the following attributes:
