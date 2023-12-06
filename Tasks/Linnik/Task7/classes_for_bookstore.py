@@ -1,4 +1,7 @@
 import re
+import decimal
+
+decimal.getcontext().prec = 2
 
 
 class Book:
@@ -78,16 +81,75 @@ class PhysicalBook(Book):
 
 class Customer:
 
-    class ShoppingCart:
-        pass
+    class __ShoppingCart:
+
+        def __init__(self):
+            self.cart = {}
+
+        def add_book(self, *books):
+            for book in books:
+                if isinstance(book, EBook) and book.title in self.cart:
+                    continue
+                if isinstance(book, PhysicalBook):
+                    if book.in_stock and book.title in self.cart:
+                        self.cart[book.title][1] += 1
+                    elif book.in_stock:
+                        self.cart[book.title] = [book.price, 1]
+                elif isinstance(book, Book) and book.title in self.cart:
+                    self.cart[book.title][1] += 1
+                else:
+                    self.cart[book.title] = [book.price, 1]
+
+        def remove_book(self, book):
+            self.cart.pop(book.title)
+
+        def total_price(self):
+            full_price = 0
+            for book in self.cart:
+                full_price = self.cart[book][0] * self.cart[book][1]
+            return full_price
 
     def __init__(self, name, email, address):
         self.name = name
         self.email = email
         self.address = address
+        self.cart = Customer.__ShoppingCart()
 
 
-e_paws = EBook('My Life In His Paws', 'Wendy Hillings', 1234567891634, 25, \
+class PremiumCustomer(Customer):
+    def __init__(self, name, email, address, membership_status, discount_rate):
+        super().__init__(name, email, address)
+        self.membership_status = membership_status
+        self.discount_rate = decimal.Decimal(f'{discount_rate}')
+
+    def discount_to_your_cart(self):
+        if self.cart.cart:
+            price_without_discount = decimal.Decimal(f'{self.cart.total_price()}')
+            final_price = float(price_without_discount - price_without_discount * self.discount_rate)
+            return final_price
+        else:
+            return 'Now you have no books that you would buy. Find somthing you would like and put it in your cart'
+
+
+class Order:
+    # Class 7: Order
+    # Create a class Order that represents a customer's order. It should include:
+    #
+    # The customer who placed the order.
+    # The list of items in the order (books or ebooks).
+    # The total price of the order.
+    pass
+
+
+# Task:
+    # Write a Python program that demonstrates the use of these classes. Create instances of books, ebooks, and customers.
+    # Add items to the shopping cart, apply discounts for premium customers, and generate an order.
+    #
+    # Ensure that your program adheres to good object-oriented design principles,
+    # such as encapsulation, inheritance, and proper use of attributes and methods.
+
+
+e_paws = EBook('My Life In His Paws', 'Wendy Hillings', 1234567891634, 15, \
                'PDF', 10, "https://www.goodreads.com/book/show/29244831-my-life-in-his-paws")
 #
 ph_paws1 = PhysicalBook('My Life In His Paws', 'Wendy Hillings', 1234567891234, 25, \
@@ -98,6 +160,8 @@ ph_paws2 = PhysicalBook('My Life In His Paws', 'Wendy Hillings', 1234567893454, 
                        200)
 ennead = EBook('Ennead', 'Mojito', 1234567891267, 30, \
                'ePub', 30, "https://www.tappytoon.com/en/book/ennead")
+my_book = Book('Book', 'Author', 1234567890213, 100)
+very_expensive_book = Book('ExpensiveBook', 'RealAuthor', 1234444490213, 437)
 
 print('e_paws:', e_paws.title, e_paws.author, e_paws.isbn, e_paws.price, \
       e_paws.format_and_file_size, e_paws.download_link, sep='; ')
@@ -108,27 +172,23 @@ print('ph_paws2:', ph_paws2.title, ph_paws2.author, ph_paws2.isbn, ph_paws2.pric
 print('ennead:', ennead.title, ennead.author, ennead.isbn, ennead.price, \
       ennead.format_and_file_size, ennead.download_link, sep='; ')
 
+cust1 = Customer('Zarin', '123@gmail.com', 'Tower Square, 11')
+cust2 = Customer('Alin', 'al23@gmail.com', 'Big Ban, 11')
 
-# Add a book (either Book, EBook, or PhysicalBook) to the cart.
-# Remove a book from the cart.
-# Calculate the total price of the items in the cart.
+cust1.cart.add_book(e_paws, e_paws, ennead)  # {'My Life In His Paws': [15, 1], 'Ennead': [30, 1]}
+cust2.cart.add_book(ph_paws1, ph_paws2, ph_paws2, my_book, my_book)  # {'My Life In His Paws': [45, 2], 'Book': [100, 2]}
+cust1.cart.remove_book(ennead)
+cust2.cart.remove_book(my_book)
+print(cust1.cart.cart, cust1.cart.total_price())  # {'My Life In His Paws': [15, 1]} 15
+print(cust2.cart.cart, cust2.cart.total_price())  # {'My Life In His Paws': [45, 2]} 90
 
-# Class 6: PremiumCustomer
-# Create a class PremiumCustomer that inherits from the Customer class.
-# Add an attribute for membership status and a discount rate for premium customers.
-# Implement a method to apply the discount to the total price in the shopping cart.
+premium_customer1 = PremiumCustomer('Alana', 'evil@gmail.com', 'Hell', 'BigDaddy', 0.9)
+premium_customer1.cart.add_book(e_paws, ennead, ph_paws2)
+print('Your price with the discount is', premium_customer1.discount_to_your_cart(), \
+      '. If it was without your great discount it would be', premium_customer1.cart.total_price())
 
-# Class 7: Order
-# Create a class Order that represents a customer's order. It should include:
-#
-# The customer who placed the order.
-# The list of items in the order (books or ebooks).
-# The total price of the order.
-
-
-# Task:
-# Write a Python program that demonstrates the use of these classes. Create instances of books, ebooks, and customers.
-# Add items to the shopping cart, apply discounts for premium customers, and generate an order.
-#
-# Ensure that your program adheres to good object-oriented design principles,
-# such as encapsulation, inheritance, and proper use of attributes and methods.
+premium_customer2 = PremiumCustomer('Elan', 'kind@gmail.com', 'Paradise', 'MassiveMommy', 0.35)
+premium_customer2.cart.add_book(very_expensive_book)
+premium_customer2.discount_to_your_cart()
+print('Your price with the discount is', premium_customer2.discount_to_your_cart(), \
+      '. If it was without your great discount it would be', premium_customer2.cart.total_price())
