@@ -115,6 +115,9 @@ class Customer:
         self.address = address
         self.cart = Customer.__ShoppingCart()
 
+    def pay_for_it(self):
+        Order.give_info(self.name, self.cart.total_price(), self.cart.cart)
+
 
 class PremiumCustomer(Customer):
     def __init__(self, name, email, address, membership_status, discount_rate):
@@ -132,21 +135,28 @@ class PremiumCustomer(Customer):
 
 
 class Order:
-    # Class 7: Order
-    # Create a class Order that represents a customer's order. It should include:
-    #
-    # The customer who placed the order.
-    # The list of items in the order (books or ebooks).
-    # The total price of the order.
-    pass
 
+    __order_of_customers = []
+    __total_order_price = 0
+    __order_of_books = []
 
-# Task:
-    # Write a Python program that demonstrates the use of these classes. Create instances of books, ebooks, and customers.
-    # Add items to the shopping cart, apply discounts for premium customers, and generate an order.
-    #
-    # Ensure that your program adheres to good object-oriented design principles,
-    # such as encapsulation, inheritance, and proper use of attributes and methods.
+    @staticmethod
+    def give_info(name, price, cart_with_books):
+        Order.__order_of_customers.append(name)
+        Order.__total_order_price += price
+        ([Order.__order_of_books.extend([book for _ in range(cart_with_books[book][1])]) for book in cart_with_books])
+
+    @staticmethod
+    def get_customer_order():
+        return Order.__order_of_customers
+
+    @staticmethod
+    def get_order_total_price():
+        return Order.__total_order_price
+
+    @staticmethod
+    def get_books_order():
+        return Order.__order_of_books
 
 
 e_paws = EBook('My Life In His Paws', 'Wendy Hillings', 1234567891634, 15, \
@@ -192,3 +202,14 @@ premium_customer2.cart.add_book(very_expensive_book)
 premium_customer2.discount_to_your_cart()
 print('Your price with the discount is', premium_customer2.discount_to_your_cart(), \
       '. If it was without your great discount it would be', premium_customer2.cart.total_price())
+
+
+cust2.pay_for_it()
+cust1.pay_for_it()
+premium_customer2.pay_for_it()
+premium_customer1.pay_for_it()
+
+print(Order.get_customer_order(), cust2.name, cust1.name, premium_customer2.name, premium_customer1.name)
+print(Order.get_books_order(), cust2.cart.cart, cust1.cart.cart, premium_customer2.cart.cart, premium_customer1.cart.cart)
+print(Order.get_order_total_price(), cust2.cart.total_price(), cust1.cart.total_price(), \
+      premium_customer2.cart.total_price(), premium_customer1.cart.total_price())
