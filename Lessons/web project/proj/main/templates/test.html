@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,4 +9,5 @@
 <body>
     <h1>It's alive!</h1>
     <p>The current date and time is {{current_time}}</p>
+    <img src="{% static 'main/img/test.jpg' %}"/>
 </html>
