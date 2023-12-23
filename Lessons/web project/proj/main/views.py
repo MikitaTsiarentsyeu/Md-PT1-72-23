@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import datetime
 from .models import Post, Author
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -10,15 +11,12 @@ def test(request):
 
 def posts(request):
     posts = Post.objects.all()
-    titles = ""
-    for p in posts:
-        titles = f"{titles} {p.title}"
-    return render(request, 'posts.html', {"posts_titles":titles})
+
+    return render(request, 'posts.html', {"posts":posts})
 
 def post(request, post_id):
     try:
         post = Post.objects.get(id=post_id)
-        title = post.title
     except:
-        title = "was not found"
-    return render(request, 'posts.html', {"posts_titles":title})
+        post = ""
+    return render(request, 'post.html', {"post":post})

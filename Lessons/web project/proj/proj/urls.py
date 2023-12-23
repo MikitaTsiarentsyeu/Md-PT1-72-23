@@ -29,10 +29,10 @@ get a post - /posts/{id}
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', main_views.test),
-    path('', main_views.posts),
+    path('', main_views.posts, name='empty'),
     # path('posts/<str:post_id>/', main_views.post),
     path('posts/', main_views.posts),
-    path('posts/<int:post_id>/', main_views.post),
+    path('posts/<int:post_id>/', main_views.post, name='post'),
     
 ]
 
