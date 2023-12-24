@@ -10,9 +10,20 @@
 
   <body>
     <header>
-        <a href="{% url 'empty' %}">
-            <h1>My Blog</h1>
-        </a>
+        <div style="display: flex;justify-content: space-evenly;align-items: center;width: 100%;">
+            <a href="{% url 'empty' %}">
+                <h1>My Blog</h1>
+            </a>
+            {% if user.is_authenticated %}
+                <p>{{user.get_username}}</p>
+                {% if perms.main.add_post %}
+                    <a href="{% url 'add' %}">Add post</a>
+                {% endif %}
+                <a href="{% url 'logout' %}?next={{request.path}}">logout</a>
+            {% else %}
+                <a href="{% url 'login' %}?next={{request.path}}">login</a>
+            {% endif %}
+        </div>
     </header>
     <div class="container">
         <div class="column">
