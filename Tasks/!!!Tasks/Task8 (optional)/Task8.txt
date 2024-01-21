@@ -13,7 +13,3 @@ Add a new album or movie to the collection.
 List all albums or movies in the collection.
 Search for an album or movie by title, artist/director, year, or genre.
 Quit the program.
-
-The program should use generators to implement the search functionality.
-Specifically, you should define four generator functions: search_by_title(), search_by_artist(), search_by_year(), and search_by_genre().
-Each function should take the search term. The function should yield all matching albums/movies one by one.
